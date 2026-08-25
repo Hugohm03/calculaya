@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Hipoteca - Calcula ya</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Volver al inicio</a>
+    <h1>Calculadora de Hipoteca y Préstamos</h1>
+    <p>Calcula tu cuota mensual estimada según la cantidad, el interés y los años.</p>
+    
+    <div class="calculator-card">
+      <label for="monto">Importe del préstamo (€):</label>
+      <input type="number" id="monto" placeholder="Ej. 150000">
+
+      <label for="interes">Interés anual (%):</label>
+      <input type="number" id="interes" step="0.01" placeholder="Ej. 3.5">
+
+      <label for="anios">Plazo (años):</label>
+      <input type="number" id="anios" placeholder="Ej. 25">
+
+      <button onclick="calcularHipoteca()">Calcular Cuota</button>
+
+      <div id="resultado" class="result-box"></div>
+    </div>
+  </div>
+
+  <script>
+    function calcularHipoteca() {
+      const P = parseFloat(document.getElementById('monto').value);
+      const anualR = parseFloat(document.getElementById('interes').value);
+      const N = parseInt(document.getElementById('anios').value) * 12;
+
+      if (isNaN(P) || isNaN(anualR) || isNaN(N) || P <= 0 || N <= 0) {
+        document.getElementById('resultado').innerText = "Por favor, introduce datos válidos.";
+        return;
+      }
+
+      const r = (anualR / 100) / 12;
+      let cuota;
+
+      if (r === 0) {
+        cuota = P / N;
+      } else {
+        cuota = (P * r * Math.pow(1 + r, N)) / (Math.pow(1 + r, N) - 1);
+      }
+
+      const totalPagado = cuota * N;
+      const interesesTotales = totalPagado - P;
+
+      document.getElementById('resultado').innerHTML = 
+        `<strong>Cuota mensual:</strong> ${cuota.toFixed(2)} €<br>` +
+        `<small>Total a pagar: ${totalPagado.toFixed(2)} € (Intereses: ${interesesTotales.toFixed(2)} €)</small>`;
+    }
+  </script>
+</body>
+</html>
