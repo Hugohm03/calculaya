@@ -1,96 +1,97 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<!-- Configuración básica de idioma y pantalla -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Título de la web (lo que se lee en la pestaña y en los resultados de Google) -->
-    <title>Calcula ya | Calculadoras de impuestos, sueldos y porcentajes</title>
-
-    <!-- Descripción principal que muestra Google en los resultados -->
+    <!-- Título y metadatos para Google y redes sociales -->
+    <title>Calcula ya | Calculadoras online de impuestos, sueldos y porcentajes</title>
     <meta name="description" content="Haz números al instante y sin líos. Calcula ya reúne las calculadoras cotidianas que necesitas: impuestos, nóminas, porcentajes y consumo de combustible.">
-
-    <!-- Vista previa al compartir el enlace en WhatsApp, Telegram o redes sociales -->
+    
     <meta property="og:title" content="Calcula ya | Herramientas de cálculo rápido">
     <meta property="og:description" content="Resuelve tus cuentas de impuestos, porcentajes, gasolina y sueldo en segundos.">
     <meta property="og:type" content="website">
 
-    <!-- Enlace a tu archivo de estilos (si tu archivo CSS se llama diferente, cámbialo aquí) -->
+    <!-- Enlace a tu hoja de estilos CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <header class="main-header">
-      <h1>Calcula ya</h1>
-      <p class="subtitle">Herramientas rápidas y sencillas para tus cálculos diarios</p>
+
+    <header>
+        <h1>Calcula ya</h1>
+        <p>Tu suite de calculadoras rápidas y herramientas online</p>
     </header>
 
-    <main class="grid-menu">
-      <a href="porcentajes.html" class="menu-card">
-        <div class="card-icon">%</div>
-        <div class="card-content">
-          <h3>Porcentajes</h3>
-          <p>Calcula porcentajes, aumentos y diferencias rápidamente.</p>
-        </div>
-      </a>
+    <main class="contenedor-principal">
 
-      <a href="iva.html" class="menu-card">
-        <div class="card-icon">💶</div>
-        <div class="card-content">
-          <h3>Calculadora de IVA</h3>
-          <p>Suma o desglosa el IVA de cualquier importe.</p>
-        </div>
-      </a>
+        <!-- Calculadora 1: Porcentajes -->
+        <section class="calculadora-card" id="porcentajes">
+            <h2>Calculadora de Porcentajes</h2>
+            <form>
+                <label for="porcentaje">Porcentaje (%):</label>
+                <input type="number" id="porcentaje" placeholder="Ej: 21">
 
-      <a href="combustible.html" class="menu-card">
-        <div class="card-icon">⛽</div>
-        <div class="card-content">
-          <h3>Combustible</h3>
-          <p>Calcula el gasto estimado de carburante para tu viaje.</p>
-        </div>
-      </a>
+                <label for="cantidad">De la cantidad:</label>
+                <input type="number" id="cantidad" placeholder="Ej: 100">
 
-      <a href="sueldo.html" class="menu-card">
-        <div class="card-icon">💼</div>
-        <div class="card-content">
-          <h3>Sueldo Neto</h3>
-          <p>Estima tu salario neto mensual a partir del bruto anual.</p>
-        </div>
-      </a>
+                <button type="button" onclick="calcularPorcentaje()">Calcular</button>
+            </form>
+            <div class="resultado" id="resultado-porcentaje">Resultado: -</div>
+        </section>
 
-      <a href="hipoteca.html" class="menu-card">
-        <div class="card-icon">🏠</div>
-        <div class="card-content">
-          <h3>Hipoteca y Préstamo</h3>
-          <p>Calcula la cuota mensual y el total de intereses.</p>
-        </div>
-      </a>
+        <!-- Calculadora 2: Impuestos (IVA) -->
+        <section class="calculadora-card" id="impuestos">
+            <h2>Calculadora de Impuestos (IVA)</h2>
+            <form>
+                <label for="precio">Base imponible (€):</label>
+                <input type="number" id="precio" placeholder="Ej: 50">
 
-      <a href="descuentos.html" class="menu-card">
-        <div class="card-icon">🏷️</div>
-        <div class="card-content">
-          <h3>Descuentos</h3>
-          <p>Descubre el precio final y lo que te ahorras en rebajas.</p>
-        </div>
-      </a>
+                <label for="tipo-iva">Tipo de IVA (%):</label>
+                <input type="number" id="tipo-iva" value="21">
 
-      <a href="propina.html" class="menu-card">
-        <div class="card-icon">🍽️</div>
-        <div class="card-content">
-          <h3>Propina y Cuenta</h3>
-          <p>Divide la cuenta entre varias personas e incluye propina.</p>
-        </div>
-      </a>
+                <button type="button" onclick="calcularIVA()">Calcular Total</button>
+            </form>
+            <div class="resultado" id="resultado-iva">Resultado: -</div>
+        </section>
 
-      <a href="imc.html" class="menu-card">
-        <div class="card-icon">⚖️</div>
-        <div class="card-content">
-          <h3>Masa Corporal (IMC)</h3>
-          <p>Calcula tu índice de masa corporal y diagnóstico.</p>
-        </div>
-      </a>
+        <!-- Calculadora 3: Consumo de Combustible -->
+        <section class="calculadora-card" id="combustible">
+            <h2>Consumo de Combustible</h2>
+            <form>
+                <label for="kilometros">Kilómetros recorridos:</label>
+                <input type="number" id="kilometros" placeholder="Ej: 450">
+
+                <label for="litros">Litros consumidos:</label>
+                <input type="number" id="litros" placeholder="Ej: 30">
+
+                <button type="button" onclick="calcularCombustible()">Calcular Consumo</button>
+            </form>
+            <div class="resultado" id="resultado-combustible">Resultado: -</div>
+        </section>
+
+        <!-- Calculadora 4: Sueldo Neto / Bruto -->
+        <section class="calculadora-card" id="sueldo">
+            <h2>Estimador de Sueldo Neto</h2>
+            <form>
+                <label for="sueldo-bruto">Sueldo Bruto Anual (€):</label>
+                <input type="number" id="sueldo-bruto" placeholder="Ej: 24000">
+
+                <label for="pagas">Número de pagas:</label>
+                <select id="pagas">
+                    <option value="12">12 pagas</option>
+                    <option value="14">14 pagas</option>
+                </select>
+
+                <button type="button" onclick="calcularSueldo()">Calcular Estimación</button>
+            </form>
+            <div class="resultado" id="resultado-sueldo">Resultado: -</div>
+        </section>
+
     </main>
-  </div>
+
+    <footer>
+        <p>&copy; 2026 Calcula ya - Todos los derechos reservados</p>
+    </footer>
+
 </body>
 </html>
