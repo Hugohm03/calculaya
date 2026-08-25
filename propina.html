@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Propina - Calcula ya</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Volver al inicio</a>
+    <h1>Calculadora de Propina y Cuenta Dividida</h1>
+    <p>Calcula la propina total y cuánto le toca pagar a cada persona.</p>
+    
+    <div class="calculator-card">
+      <label for="totalCuenta">Total de la cuenta (€):</label>
+      <input type="number" id="totalCuenta" placeholder="Ej. 85">
+
+      <label for="porcentajePropina">Porcentaje de propina (%):</label>
+      <input type="number" id="porcentajePropina" placeholder="Ej. 10" value="10">
+
+      <label for="personas">Número de personas:</label>
+      <input type="number" id="personas" placeholder="Ej. 4" value="1">
+
+      <button onclick="calcularPropina()">Calcular Pago</button>
+
+      <div id="resultado" class="result-box"></div>
+    </div>
+  </div>
+
+  <script>
+    function calcularPropina() {
+      const cuenta = parseFloat(document.getElementById('totalCuenta').value);
+      const pct = parseFloat(document.getElementById('porcentajePropina').value);
+      const personas = parseInt(document.getElementById('personas').value);
+
+      if (isNaN(cuenta) || isNaN(pct) || isNaN(personas) || cuenta <= 0 || personas <= 0) {
+        document.getElementById('resultado').innerText = "Por favor, introduce valores válidos.";
+        return;
+      }
+
+      const propinaTotal = cuenta * (pct / 100);
+      const totalConPropina = cuenta + propinaTotal;
+      const pagoPorPersona = totalConPropina / personas;
+
+      document.getElementById('resultado').innerHTML = 
+        `<strong>Pago por persona:</strong> ${pagoPorPersona.toFixed(2)} €<br>` +
+        `<small>Total con propina: ${totalConPropina.toFixed(2)} € (Propina total: ${propinaTotal.toFixed(2)} €)</small>`;
+    }
+  </script>
+</body>
+</html>
