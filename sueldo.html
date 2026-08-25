@@ -1,1 +1,57 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Calculadora de sueldo | CALCULA YA</title><link rel="stylesheet" href="styles.css"></head><body><header class="topbar"><a class="logo" href="index.html">CALCULA <span>YA</span></a></header><main><section class="section"><p class="eyebrow">PRÓXIMAMENTE</p><h1>Calculadora de sueldo</h1><p class="hero-text">Esta herramienta será una de las siguientes que añadiremos. La versión completa podrá calcular equivalencias entre horas, pagas y salarios.</p><a class="button" href="index.html">Volver</a></section></main></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Sueldo - Calcula ya</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Volver al inicio</a>
+    <h1>Calculadora de Sueldo (Bruto a Neto)</h1>
+    <p>Calcula un estimado de tu salario neto mensual según tu sueldo bruto anual.</p>
+    
+    <div class="calculator-card">
+      <label for="brutoAnual">Sueldo Bruto Anual (€):</label>
+      <input type="number" id="brutoAnual" placeholder="Ej. 24000">
+
+      <label for="pagas">Número de pagas:</label>
+      <select id="pagas">
+        <option value="12">12 pagas</option>
+        <option value="14">14 pagas</option>
+      </select>
+
+      <label for="irpf">Retención IRPF estimada (%):</label>
+      <input type="number" id="irpf" placeholder="Ej. 15" value="15">
+
+      <button onclick="calcularSueldo()">Calcular Sueldo Neto</button>
+
+      <div id="resultado" class="result-box"></div>
+    </div>
+  </div>
+
+  <script>
+    function calcularSueldo() {
+      const bruto = parseFloat(document.getElementById('brutoAnual').value);
+      const pagas = parseInt(document.getElementById('pagas').value);
+      const irpf = parseFloat(document.getElementById('irpf').value) / 100;
+
+      if (isNaN(bruto) || bruto <= 0) {
+        document.getElementById('resultado').innerText = "Por favor, introduce un sueldo bruto válido.";
+        return;
+      }
+
+      // Estimación básica: Cotización SS (aprox 6.35%) + IRPF
+      const cotizacionSS = 0.0635;
+      const totalDeducciones = bruto * (irpf + cotizacionSS);
+      const netoAnual = bruto - totalDeducciones;
+      const netoMensual = netoAnual / pagas;
+
+      document.getElementById('resultado').innerHTML = 
+        `<strong>Sueldo Neto Mensual:</strong> ${netoMensual.toFixed(2)} € (${pagas} pagas)<br>` +
+        `<small>Sueldo Neto Anual estimado: ${netoAnual.toFixed(2)} €</small>`;
+    }
+  </script>
+</body>
+</html>
