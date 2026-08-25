@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Descuentos - Calcula ya</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Volver al inicio</a>
+    <h1>Calculadora de Descuentos</h1>
+    <p>Averigua cuánto ahorras y cuál es el precio final tras aplicar una rebaja.</p>
+    
+    <div class="calculator-card">
+      <label for="precioOriginal">Precio original (€):</label>
+      <input type="number" id="precioOriginal" placeholder="Ej. 49.99">
+
+      <label for="porcentajeDescuento">Descuento (%):</label>
+      <input type="number" id="porcentajeDescuento" placeholder="Ej. 20">
+
+      <button onclick="calcularDescuento()">Calcular Precio Final</button>
+
+      <div id="resultado" class="result-box"></div>
+    </div>
+  </div>
+
+  <script>
+    function calcularDescuento() {
+      const precio = parseFloat(document.getElementById('precioOriginal').value);
+      const pct = parseFloat(document.getElementById('porcentajeDescuento').value);
+
+      if (isNaN(precio) || isNaN(pct) || precio < 0 || pct < 0) {
+        document.getElementById('resultado').innerText = "Por favor, introduce valores válidos.";
+        return;
+      }
+
+      const ahorro = precio * (pct / 100);
+      const precioFinal = precio - ahorro;
+
+      document.getElementById('resultado').innerHTML = 
+        `<strong>Precio final:</strong> ${precioFinal.toFixed(2)} €<br>` +
+        `<small>Te ahorras: ${ahorro.toFixed(2)} €</small>`;
+    }
+  </script>
+</body>
+</html>
